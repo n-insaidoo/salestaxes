@@ -1,4 +1,4 @@
-package org.salestaxes;
+package org.salestaxes.shopping;
 
 public class CartItem {
 

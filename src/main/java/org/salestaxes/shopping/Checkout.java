@@ -1,17 +1,11 @@
-package org.salestaxes;
+package org.salestaxes.shopping;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Checkout {
 
-    private final Cart cart;
-
-    public Checkout(Cart cart) {
-        this.cart = cart;
-    }
-
-    public Receipt checkout() {
+    public Receipt checkout(Cart cart) {
         List<ReceiptItem> items = new ArrayList<>();
 
         double totalCost = 0;
@@ -31,7 +25,9 @@ public class Checkout {
     }
 
     private String round(double cost) {
-        return String.format("%.2f", cost);
+        double value = Math.round(cost * 20);
+        value = value / 20;
+        return String.format("%.2f", value);
     }
 
     private double calculateCost(int quantity, Product product) {

@@ -1,25 +1,33 @@
-package org.salestaxes;
+package org.salestaxes.shopping;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Collections;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.salestaxes.Product.Tax;
+import org.salestaxes.shopping.Product.Tax;
 
 public class CheckoutTest {
+
+    private Checkout checkout;
+
+    @Before
+    public void setup() {
+        this.checkout = new Checkout();
+    }
 
     @Test
     public void shouldCheckoutWithEmptyCartProduceEmptyReceipt() {
         Cart cart = new Cart(Collections.emptyList());
 
-        Checkout checkout = new Checkout(cart);
+        Receipt receipt = checkout.checkout(cart);
 
         assertEquals(""
                 + "Sale taxes: 0.00\n"
                 + "Total: 0.00\n",
-                checkout.checkout().toString());
+                receipt.toString());
     }
 
     @Test
@@ -30,14 +38,14 @@ public class CheckoutTest {
         new CartItem(1, new Product("imported bottle of perfume", 27.99, asList(Tax.NON_ESSENTIALS, Tax.IMPORTED)))
         ));
 
-        Checkout checkout = new Checkout(cart);
+        Receipt receipt = checkout.checkout(cart);
 
         assertEquals(""
-                + "2 book: 24.98\n"
-                + "1 music CD: 16.49\n"
-                + "1 imported bottle of perfume: 32.19\n"
+                + "2 book: 25.00\n"
+                + "1 music CD: 16.50\n"
+                + "1 imported bottle of perfume: 32.20\n"
                 + "Sale taxes: 5.70\n"
-                + "Total: 73.66\n",
-                checkout.checkout().toString());
+                + "Total: 73.65\n",
+                receipt.toString());
     }
 }

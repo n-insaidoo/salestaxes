@@ -1,4 +1,4 @@
-package org.salestaxes;
+package org.salestaxes.shopping;
 
 import java.util.ArrayList;
 import java.util.List;

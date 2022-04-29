@@ -1,10 +1,11 @@
-package org.salestaxes;
+package org.salestaxes.shopping;
 
 import java.util.List;
 
 public class Product {
 
     public enum Tax {
+        ESSENTIALS(0),
         NON_ESSENTIALS(0.1),
         IMPORTED(0.05);
 
@@ -38,7 +39,7 @@ public class Product {
     }
 
     public boolean isTaxExempt() {
-        return taxes.isEmpty();
+        return taxes.isEmpty() || Tax.ESSENTIALS.equals(taxes.get(0));
     }
 
     public boolean isImported() {
